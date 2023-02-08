@@ -7,7 +7,7 @@ class Kernel
 
     public static function run(){
 
-        $type = "film";
+        $type = "perso";
         $action = "index";
 
 

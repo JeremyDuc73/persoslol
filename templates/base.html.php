@@ -20,7 +20,7 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
                 <li class="nav-item">
-                    <a class="nav-link active" href="?type=film&action=create">Nouveau film</a>
+                    <a class="nav-link active" href="?type=perso&action=create">Ajouter un personnage</a>
                 </li>
 
             </ul>
