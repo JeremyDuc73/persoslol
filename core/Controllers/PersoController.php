@@ -98,4 +98,53 @@ class PersoController extends AbstractController
 
         return $this->redirect();
     }
+
+    public function change(){
+        $id = null;
+
+        if(!empty($_GET['id']) && ctype_digit($_GET['id']) ){
+            $id = $_GET['id'];
+        }
+        if($id){
+            $perso = $this->repository->findById($id);
+            if(!$perso){
+                return $this->redirect();
+            }
+        }
+
+        $id = null;
+        $name = null;
+        $role = null;
+        $lore = null;
+
+        if(!empty($_POST['nameUpdate'])){
+            $name = $_POST['nameUpdate'];
+        }if(!empty($_POST['roleUpdate'])){
+            $role = $_POST['roleUpdate'];
+        }if(!empty($_POST['loreUpdate'])){
+            $lore = $_POST['loreUpdate'];
+        }if(!empty($_POST['idUpdate'])){
+            $id = $_POST['idUpdate'];
+        }
+
+        if($name && $role && $lore && $id){
+            $perso = $this->repository->findById($id);
+
+            $perso->setName($name);
+            $perso->setRole($role);
+            $perso->setLore($lore);
+            $this->repository->update($perso);
+
+            return $this->redirect([
+                "type"=>"perso",
+                "action"=>"show",
+                "id"=>$perso->getId()
+            ]);
+        }
+        return $this->render("persos/update",
+            ["perso"=>$perso,
+                "pageTitle"=>"modifier le post"]);
+
+
+    }
 }

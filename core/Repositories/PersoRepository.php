@@ -19,4 +19,14 @@ class PersoRepository extends AbstractRepository
         ]);
         return $this->pdo->lastInsertId();
     }
+
+    public function update(Perso $perso){
+        $query = $this->pdo->prepare("UPDATE {$this->tableName} SET name = :name, role= :role, lore = :lore WHERE id = :id");
+        $query->execute([
+            'id'=>$perso->getId(),
+            'name'=>$perso->getName(),
+            'role'=>$perso->getRole(),
+            'lore'=>$perso->getLore()
+        ]);
+    }
 }
